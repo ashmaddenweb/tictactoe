@@ -1,0 +1,101 @@
+body {
+    background-color: #f2f2f2;
+}
+
+h1 {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 800;
+    font-size: 1.5rem;
+    color: #3a3a3a
+}
+
+.container {
+    width: 100vw;
+    height: calc(100vh - 32px);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.header {
+    margin: 20px 0px 20px 0px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.board-container {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    width: 40vw;
+    height: 70vh;
+    gap: 10px;
+}
+
+.board-container>div {
+    background: #e0e0e0;
+    box-shadow: 5px 5px 3px #c5c5c5, -3px -3px 3px #fbfbfb;
+}
+
+.board-container>div:active {
+    background: #e0e0e0;
+    box-shadow: inset 5px 5px 3px #c5c5c5, inset -3px -3px 3px #fbfbfb;
+}
+
+.reset-button {
+    margin: 20px 0px 20px 0px;
+    box-shadow: inset 0px 1px 0px 0px #ffffff;
+    background: linear-gradient(to bottom, #ededed 5%, #dfdfdf 100%);
+    background-color: #ededed;
+    border-radius: 6px;
+    border: 1px solid #dcdcdc;
+    display: inline-block;
+    cursor: pointer;
+    color: #777777;
+    font-family: Arial;
+    font-size: 15px;
+    font-weight: bold;
+    padding: 10px 24px;
+    text-decoration: none;
+    text-shadow: 0px 1px 0px #ffffff;
+}
+
+.reset-button:hover {
+    background: linear-gradient(to bottom, #dfdfdf 5%, #ededed 100%);
+    background-color: #dfdfdf;
+}
+
+.reset-button:active {
+    position: relative;
+    top: 1px;
+}
+
+@media only screen and (max-width: 1200px) {
+    .board-container {
+        width: 40vw;
+        height: 70vh;
+    }
+}
+
+@media only screen and (max-width: 1050px) {
+    .board-container {
+        width: 50vw;
+        height: 70vh;
+    }
+}
+
+@media only screen and (max-width: 850px) {
+    .board-container {
+        width: 60vw;
+        height: 60vh;
+    }
+}
+
+@media only screen and (max-width: 550px) {
+    .board-container {
+        width: 80vw;
+        height: 50vh;
+    }
+}
