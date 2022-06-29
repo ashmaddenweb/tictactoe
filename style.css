@@ -36,19 +36,16 @@ h1 {
     gap: 10px;
 }
 
-.text-style {
-    font-family: 'Roboto', sans-serif;
-    color: #3a3a3a;
-    font-size: 4rem;
-    font-weight: 800;
-}
-
 .board-container>div {
     display: flex;
     justify-content: center;
     align-items: center;
     background: #e0e0e0;
     box-shadow: 5px 5px 3px #c5c5c5, -3px -3px 3px #fbfbfb;
+    font-family: 'Roboto', sans-serif;
+    color: #3a3a3a;
+    font-size: 4rem;
+    font-weight: 800;
 }
 
 .board-container>div:active {
