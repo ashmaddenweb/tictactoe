@@ -29,37 +29,50 @@ function gameRules() {
             [3, 5, 7],
             [4, 5, 6],
             [7, 8, 9]
-        ]
+        ],
+        condition: true
     }
 }
 
 // Whichever tile the player clicks will display an "X" character
 function startGame() {
 
+
     // checks if space on board is taken or not for players move
     for (let i = 0; i < tile.length; i++) {
-        tile[i].addEventListener("click", function() {
-            if (tile[i].innerHTML === "") {
-                player.score.push(parseInt(tile[i].id));
-                player.playerTries++;
-                tile[i].appendChild(document.createTextNode("X"));
-                return opponentTurn(newGame.win, opponent, player);
-            }
 
-            // Checks the squares selected by the player once they have had 3 turns and calculates if it's a win or not. 
-            if (player.playerTries > 2) {
-                for (let i = 0; i < newGame.win.length; i++) {
-                    if (player.score.includes(newGame.win[i][0]) && player.score.includes(newGame.win[i][1]) && player.score.includes(newGame.win[i][2])) {
-                        return alert("You Win!");
+        tile[i].addEventListener("click", function() {
+            if (newGame.condition === true) {
+                if (tile[i].innerHTML === "") {
+                    player.score.push(parseInt(tile[i].id));
+                    player.playerTries++;
+                    tile[i].appendChild(document.createTextNode("X"));
+
+                    // Checks if it's a draw
+                    if (player.playerTries === 5) {
+                        return document.getElementById("title").innerHTML = "Draw!"
                     }
+
+                    // Checks the squares selected by the player once they have had 3 turns and calculates if it's a win or not. 
+                    if (player.playerTries > 2) {
+                        for (let i = 0; i < newGame.win.length; i++) {
+                            if (player.score.includes(newGame.win[i][0]) && player.score.includes(newGame.win[i][1]) && player.score.includes(newGame.win[i][2])) {
+                                newGame.condition = false;
+                                return document.getElementById("title").innerHTML = "You Win!"
+                            }
+                        }
+                    }
+                    return setTimeout(opponentTurn, 500, newGame.win, opponent, player);
                 }
             }
+
         });
     };
 }
 
 // Chooses opponents move based on situation 
 function opponentTurn(gameRules, opponent, player) {
+
     opponent.playerTries++;
 
     // Loops through all of the tiles on each instance of this function, to ensure none have been missed
@@ -72,14 +85,16 @@ function opponentTurn(gameRules, opponent, player) {
                     if (document.getElementById(gameRules[j][2]).innerHTML === "") {
                         opponent.score.push(parseInt(gameRules[j][2]));
                         document.getElementById(gameRules[j][2]).innerHTML = "O";
-                        return alert("Opponent Wins!");
+                        newGame.condition = false;
+                        return document.getElementById("title").innerHTML = "Opponent Wins!";
                     }
                 }
                 if (opponent.score.includes(gameRules[j][1]) && opponent.score.includes(gameRules[j][2])) {
                     if (document.getElementById(gameRules[j][0]).innerHTML === "") {
                         opponent.score.push(parseInt(gameRules[j][0]));
                         document.getElementById(gameRules[j][0]).innerHTML = "O";
-                        return alert("Opponent Wins!");
+                        newGame.condition = false;
+                        return document.getElementById("title").innerHTML = "Opponent Wins!";
 
                     }
                 }
@@ -87,7 +102,8 @@ function opponentTurn(gameRules, opponent, player) {
                     if (document.getElementById(gameRules[j][1]).innerHTML === "") {
                         opponent.score.push(parseInt(gameRules[j][1]));
                         document.getElementById(gameRules[j][1]).innerHTML = "O";
-                        return alert("Opponent Wins!");
+                        newGame.condition = false;
+                        return document.getElementById("title").innerHTML = "Opponent Wins!";
                     }
                 }
             }
@@ -131,5 +147,6 @@ function opponentTurn(gameRules, opponent, player) {
 resetButton.addEventListener("click", function() {
     window.location.reload();
 });
+
 
 startGame();
